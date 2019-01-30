@@ -1,0 +1,126 @@
+
+.mainForm{
+    background: transparent;
+}
+
+img{
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 10%;
+    width: 18%;
+}
+
+.po{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-signin{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+}
+
+.reservedPOcard{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -30%;
+}
+
+.showReservedPOCard{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -30%;
+}
+
+.card{
+    min-width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.enterPObutton, .filterButton{
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.poList{
+    margin-top: 5%;
+}
+
+.poHead{
+    position: fixed;
+    margin-top: -5%;
+    width: 100%;
+    z-index: 99;
+    background-color: white;
+    justify-content: center;
+
+}
+
+.filterHead{
+    position: fixed;
+    margin-top: -5%;
+    width: 100%;
+    z-index: 99;
+    background-color: white;
+    justify-content: center;
+}
+
+.poFooter{
+    position: fixed;
+    margin-bottom: -5%;
+    width: 100%;
+    z-index: 99;
+    background-color: white;
+    justify-content: center;
+}
+
+.searchBox{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+iframe{
+    width: 100%;
+    border: none;
+    height: 50%;
+    top: -10%;
+}
+
+.showPO{
+    width: 100%;
+    height: 50%;
+}
+
+.uploadFilesSection{
+    margin-top: 5%;
+}
+
+table{
+    table-layout: fixed;
+}
+td{
+    word-wrap:break-word;
+	width:15%;
+}
+
+th{
+    width: 1%;
+    word-break: break-word;
+}
+
+.session{
+    color: white;
+    border: solid;
+    border-color: darkred;
+    background-color: indianred;
+    width: 20%;
+    margin-left: 40%;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+}
