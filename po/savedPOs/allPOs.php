@@ -6,7 +6,7 @@
  * Time: 1:22 PM
  */
 
-include('../session/header.php');
+include('../style/header.php');
 
 ?>
 
@@ -106,17 +106,12 @@ include('../session/header.php');
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                            <?php if(strpos($data[1], 'RETURNED') == false){?>
-                                                                <div class="col">
-                                                                    <button type="submit" class="btn btn-warning" name="returnPO" title="This will put a 'RETURNED' marker on this PO">Return</button>
-                                                                </div>
-                                                            <?php } ?>
-                                                                <div class="col">
-                                                                    <button type="submit" class="btn btn-danger" name="removePO" title="This will remove the PO from the log and keep it reserved for you">Remove</button>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <button type="submit" class="btn btn-primary" name="addDocs">Add Document</button>
-                                                                </div>
+                                                            <div class="col">
+                                                                <button type="submit" class="btn btn-danger" name="removePO" title="This will remove the PO from the log and keep it reserved for you">Remove</button>
+                                                            </div>
+                                                            <div class="col">
+                                                                <button type="submit" class="btn btn-primary" name="addDocs">Add Document</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

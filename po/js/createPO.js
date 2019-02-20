@@ -7,18 +7,18 @@ $(document).ready(function(e){
     $("#add").click(function(e){
         document.getElementById('poHeader').removeAttribute('style');
         var groups = "<p/><div><div class=\"form-row\" id=\"formRow\">\n" + "<div class=\"col-2\">\n" +
-            "                    <input type=\"text\" class=\"form-control\" name=\"job[]\" id=\childjob\" placeholder=\"Job Number/Office\">\n" +
+            "                    <input type=\"text\" class=\"form-control\" name=\"job[]\" id=\childjob\" placeholder=\"Job Number/Office\" required>\n" +
             "                    </div>\n" +
             "                    <div class=\"col-5\">\n" +
-            "                        <input type=\"text\" name=\"item[]\" id=\"childitem\" class=\"form-control\" placeholder=\"Item\">\n" +
+            "                        <input type=\"text\" name=\"item[]\" id=\"childitem\" class=\"form-control\" placeholder=\"Item\" required>\n" +
             "                    </div>\n" +
             "                    <div class=\"col-1\">\n" +
-            "                        <input type=\"number\" value=\"1\" class=\"form-control qty"+id+"\" name=\"quantity[]\" max=\"50\" id=\"childquantity\" placeholder=\"Quantity\" oninput=\"calculate("+id+");\">\n" +
+            "                        <input type=\"number\" value=\"1\" class=\"form-control qty"+id+"\" name=\"quantity[]\" max=\"500\" id=\"childquantity\" placeholder=\"Quantity\" oninput=\"calculate("+id+");\" required>\n" +
             "                    </div>\n" +
             "                    <div class=\"col-2\">\n" +
-            "                        <input type=\"number\" value=\"0.00\" step=\"0.01\" data-number-to-fixed=\"2\" data-number-stepfactor=\"100\" class=\"form-control currency updatePrice thisPrice"+id+"\"  name=\"price[]\" id=\"childprice\" min=\"0\" oninput=\"calculate("+id+");\" \">\n" +
+            "                        <input type=\"number\" value=\"0.00\" step=\"0.01\" data-number-to-fixed=\"2\" data-number-stepfactor=\"100\" class=\"form-control currency updatePrice thisPrice"+id+"\"  name=\"price[]\" id=\"childprice\" min=\"0\" oninput=\"calculate("+id+");\" \" required>\n" +
             "                    </div><div class=\"col-1\"><input  class=\"form-control text-right\" type=\"text\" id=\"totalEach"+id+"\" name=\"totalPriceArray[]\" disabled></div>" +
-            "                    <div class=\"col-1 text-center\"><a href=\"#\" class=\"btn btn-danger\" name=\""+id+"\" id=\"remove\" value=\""+id+"\">X</a></div>" +
+            "                    <div class=\"col-1 text-center\"><a href=\"#\" class=\"btn btn-danger\" name=\""+id+"\" id=\"remove\" value=\""+id+"\"><i class=\"fas fa-trash-alt\"></i></a></div>" +
             "                    </div>";
         if(i <= maxRows) {
             $("#formGroup").append(groups);

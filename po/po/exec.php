@@ -6,16 +6,17 @@
  * Time: 9:25 AM
  */
 include('../session/sessions.php');
-
+//require('../style/')
 ?>
 
-<?php if(isset($_SESSION['initials'])){ ?>
+<?php if(isset($_SESSION['initials']) && isset($_POST['job'])): ?>
+
 <html>
     <header>
-
-    <?php include('../session/header.php');
-        $_SESSION['po'] = $_POST['poName'];
-    ?>
+        <?php
+            require('../style/header.php');
+            $_SESSION['po'] = $_POST['poName'];
+        ?>
 
         <title><?php $po = $_SESSION['po']; echo $po; ?></title>
     </header>
@@ -35,6 +36,7 @@ include('../session/sessions.php');
                     {echo $_SESSION['vendor'];}
                     else{
                         echo $_POST['vendor'];
+                        //echo $_SESSION['dateOfPO'];
                     }
                     ?>
                 </h4>
@@ -204,29 +206,36 @@ include('../session/sessions.php');
             }
 
             $list  = array($_SESSION['initials'], $_SESSION['po'], $_SESSION['jobString'], $_SESSION['dateOfPO'], $_SESSION['itemString']);
-            echo $_SESSION['dateOfPO'];
+            //
             ?>
 
+            <form method="post" action="../createPDF/toPdf.php">
+                <div class="row">
+                    <div class="col-1">
 
-            <div class="row">
-                <div class="col-3">
-                    <!--            Info Modal-->
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoModalLong">
-                        <i class="fa fa-info" aria-hidden="true"></i> Info
-                    </button>
-                </div>
-                <div class="offset-9">
-                    <form method="post" action="../createPDF/toPdf.php">
-                        <button class="btn btn-lg btn-primary align-center" name="createPDF">Next</button>
-                    </form>
+                    </div>
+                    <div class="col-5">
+                        <!--            Info Modal-->
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoModalLong">
+                            <i class="fa fa-info" aria-hidden="true"></i> Info
+                        </button>
+                    </div>
+                    <div class="col-5 text-right">
 
+                            <button class="btn btn-lg btn-primary align-center btnNext" name="createPDF">Next</button>
+
+                    </div>
+                    <div class="col-1">
+
+                    </div>
                 </div>
-            </div>
+            </form>
             <div class="row">
-                <div class="offset-9">
+                <div class="col-6"></div>
+                <div class="col-5">
                     <form method="post" action="createPO.php">
-                        <input type="text" name="poName" value="<?php echo $po ?>" style="display: none;">
-                        <button class="btn btn-lg btn-danger align-center" name="makePOchanges">Back</button>
+                        <input type="hidden" name="poName" value="<?php echo $po ?>">
+                        <button class="btn btn-lg btn-danger align-center btnNext" name="makePOchanges">Back</button>
                     </form>
                 </div>
             </div>
@@ -258,7 +267,9 @@ include('../session/sessions.php');
 
 </html>
 
-<?php } else{header('Location: index.php');}
-
-
-?>
+<?php else: ?>
+    <?php
+    $_SESSION['error'] = 'Please enter items for PO';
+    header('Location: createPO.php');
+    ?>
+<?php endif; ?>

@@ -7,11 +7,8 @@
  */
 include('../session/sessions.php');
 
-?>
-
-<?php
-
-if(isset($_POST['uploadFile']) && file_exists('uploadedFiles/'.$_SESSION['po'].'.pdf') || isset($_POST['uploadFile']) && isset($_SESSION['addDocs'])){
+if(isset($_SESSION['po'])){
+    if(isset($_POST['uploadFile']) && file_exists('uploadedFiles/'.$_SESSION['po'].'.pdf') || isset($_POST['uploadFile']) && isset($_SESSION['addDocs'])){
     $files = [];
     $allowed= array('application/pdf', 'PDF', 'PDF Document', 'Foxit Reader PDF Document');
     if(file_exists('uploadedFiles/'.$_SESSION['po'].'.pdf')) {
@@ -22,7 +19,7 @@ if(isset($_POST['uploadFile']) && file_exists('uploadedFiles/'.$_SESSION['po'].'
         $nameArray = $_FILES['userFile']['name'];
         $fileTempName = $_FILES['userFile']['tmp_name'];
         $typeArray = $_FILES['userFile']['type'];
-        //
+
         for($i=0;$i<sizeof($nameArray);$i++){
 
             if(in_array($typeArray[$i], $allowed)){
@@ -39,7 +36,7 @@ if(isset($_POST['uploadFile']) && file_exists('uploadedFiles/'.$_SESSION['po'].'
     }
     if(sizeof($files) > 0){
         $_SESSION['filesArray'] = $files;
-        print_r($files);
+        //print_r($files);
         header('Location: merge.php');
     }
     else{
@@ -53,17 +50,12 @@ if(isset($_POST['uploadFile']) && file_exists('uploadedFiles/'.$_SESSION['po'].'
 
     <header>
         <title><?php echo $_SESSION['po']; ?></title>
-        <?php include('../session/header.php'); ?>
+        <?php require('../style/header.php'); ?>
         <link rel="stylesheet" href="../style/index.css" type="text/css">
         <script src="../js/createPDF.js" type="text/javascript"></script>
     </header>
 
     <body>
-        <?php
-            if(isset($_SESSION['error'])){
-                echo "<script>alert(".$_SESSION['error'].")</script>";
-            }
-        ?>
 
         <div class="uploadFilesSection">
             <div class="container text-center">
@@ -133,4 +125,6 @@ if(isset($_POST['uploadFile']) && file_exists('uploadedFiles/'.$_SESSION['po'].'
             </div>
         </div>
     </div>
-</div>
+</div><?php }else{
+    header('Location: ../index.php');
+}

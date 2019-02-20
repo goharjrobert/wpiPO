@@ -56,3 +56,4 @@ function calculateTotal(){
     console.log("total price: " + totalPrice);
     document.getElementById("totalPrice").innerHTML = "Total: $"+totalPrice;
 }
+

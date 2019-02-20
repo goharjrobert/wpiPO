@@ -5,30 +5,22 @@
  * Date: 9/30/2018
  * Time: 10:37 AM
  */
+    //require('assets/index.php');
     include('session/sessions.php');
-    include('session/header.php');
+    require('style/header.php');
+    require('po/NewPO.php');
 
-    $file = 'Log.csv';
-    $copy = 'Log-backup.csv';
-    copy($file, $copy);
-    $input = fopen('Log.csv', 'r');
-    while(($data = fgetcsv($input)) !== FALSE) {
-        //print_r($data[1]);
-        if($data[0] == "" && $data[1] != "" && $data[2] == "") {
-            //echo $data[1];
-            $po = $data[1];
-            $_SESSION['po'] = $po;
-            break;
-        }
+    $newPO = new NewPO();
+    //echo $_SESSION['po'];
+    if(!isset($_SESSION['po'])) {
+        //echo "Hello";
+        $_SESSION['po'] = $newPO->getNewPO();
     }
-
-    fclose($input);
-
-   if(isset($_SESSION['error'])){
-       echo "<h3 class='sessionError'>".$_SESSION['error']."</h3>";
-       unset($_SESSION['error']);
-
-   }
+    elseif(isset($_SESSION['poNotAvailable'])){
+        echo "<div class='container'><div class='alert-danger'>" . $_SESSION['poNotAvailable'] . "</div></div>";
+        unset($_SESSION['poNotAvailable']);
+        $_SESSION['po'] = $newPO->getNewPO();
+    }
 
 ?>
 
@@ -60,8 +52,7 @@
         </div>
         <?php
 
-            if(isset($_SESSION['reservedPOs'])){
-                ?>
+            if(isset($_SESSION['reservedPOs'])): ?>
                 <div class="container">
                     <div class="row">
                         <div class="card reservedPOcard" style="width: 18rem;">
@@ -106,11 +97,7 @@
                         </div>
                     </div>
                 </div>
-                <?php
-            }
-
-            if(isset($_SESSION['reserved'])){
-                ?>
+            <?php elseif(isset($_SESSION['reserved'])): ?>
                 <div class="container">
                     <div class="row">
                         <div class="card showReservedPOCard">
@@ -125,9 +112,8 @@
                     </div>
                 </div>
 
-                <?php
-            }
-            unset($_SESSION['reserved']);
+            <?php endif;
+                unset($_SESSION['reserved']);
             ?>
 
 

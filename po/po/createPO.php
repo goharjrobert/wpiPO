@@ -5,7 +5,7 @@
  * Date: 11/19/2018
  * Time: 8:38 AM
  */
-include('../session/header.php');
+require('../style/header.php');
 include('../session/sessions.php');
 include('readPOInfo.php');
 
@@ -14,17 +14,20 @@ if(isset($_POST['createPO']) || isset($_POST['reservePO'])){
     $_SESSION['initials'] = $initials;
     $po = $_SESSION['po'];
 
-
     //$list  = array($initials, $po, '','');
     reserve($initials, $po);
-    if(isset($_POST['reservePO'])){
-        //$_SESSION['reserved'] = 'reserved';
+    if(!isset($_SESSION['error'])) {
+        $_SESSION['reserved'] = $po;
+        if (isset($_POST['reservePO'])) {
+            header('Location: ../index.php');
+        }
+        unset($_POST['createPO']);
+        unset($_POST['reservePO']);
+    }else{
+        $_SESSION['poNotAvailable'] = "PO " . $_SESSION['po'] . " no longer available";
+        //session_unset();
         header('Location: ../index.php');
     }
-
-    unset($_POST['createPO']);
-    unset($_POST['reservePO']);
-
 }
 
 else if(isset($_POST['lookupPO'])){
@@ -67,6 +70,10 @@ else if(!isset($_SESSION['createPO'])){
     header('Location: ../index.php');
 }
 
+if(isset($_SESSION['error'])){
+    echo "<div class='container'><div class='alert-danger text-center'>" . $_SESSION['error'] . "</div></div>";
+    unset($_SESSION['error']);
+}
 ?>
 <html>
 
@@ -77,9 +84,18 @@ else if(!isset($_SESSION['createPO'])){
 
 <body>
 <div class="container">
-    <h1>
-        <?php echo $_SESSION['po']; ?>
-    </h1>
+    <div class="row">
+        <div class="col text-left">
+            <h1>
+                <?php echo $_SESSION['po']; ?>
+            </h1>
+        </div>
+        <div class="col text-right">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoModalLong">
+                <i class="fa fa-info" aria-hidden="true"></i> Info
+            </button>
+        </div>
+    </div>
     <form method="post" action="exec.php">
         <div class="form-row">
             <div class="col">
@@ -122,18 +138,20 @@ else if(!isset($_SESSION['createPO'])){
         
         <div class="form-row">
 <!--            Info Modal-->
-            <input name="poName" type="text" value="<?php echo $_SESSION['po'] ?>" style="display: none;">
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoModalLong">
-                <i class="fa fa-info" aria-hidden="true"></i> Info
-            </button>
-            <div class="col text-center">
-                <a href="#" class="btn btn-primary" name="add" id="add"><i class="fas fa-plus"></i> Add Item</a>
+            <div class="col-1">
+                <input name="poName" type="hidden" value="<?php echo $_SESSION['po'] ?>" style="display: none;">
             </div>
-            <div class="col text-center">
+
+            <div class="col-5 text-center">
+                <a href="#" class="addItemButton btn btn-primary" name="add" id="add"><i class="fas fa-plus"></i> Add Item</a>
+            </div>
+            <div class="col-5 text-right">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createPOmodal">
+                <button type="button" class="btnNext btn btn-success" data-toggle="modal" data-target="#createPOmodal">
                     Next
                 </button>
+
+            </div>
 
                 <!-- create PO Modal -->
                 <div class="modal fade" id="createPOmodal" tabindex="-1" role="dialog" aria-labelledby="createPOmodal" aria-hidden="true">
@@ -188,7 +206,7 @@ else if(!isset($_SESSION['createPO'])){
                     </div>
                 </div>
 
-            </div>
+
 
         </div>
 

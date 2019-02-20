@@ -5,7 +5,7 @@
  * Date: 1/17/2019
  * Time: 1:21 PM
  */
-include('../session/header.php');
+require('../style/header.php');
 ?>
 <html>
 
@@ -115,11 +115,6 @@ include('../session/header.php');
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                            <?php if(strpos($data[1], 'RETURNED') == false){?>
-                                                                <div class="col">
-                                                                    <button type="submit" class="btn btn-warning" name="returnPO" title="This will put a 'RETURNED' marker on this PO">Return</button>
-                                                                </div>
-                                                            <?php } ?>
                                                             <div class="col">
                                                                 <button type="submit" class="btn btn-danger" name="removePO" title="This will remove the PO from the log and keep it reserved for you">Remove</button>
                                                             </div>

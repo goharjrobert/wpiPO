@@ -1,8 +1,11 @@
 <?php
 include('../session/sessions.php');
+require('../style/header.php');
 use setasign\Fpdi;
 use setasign\tcpdf;
 
+
+echo ('<title>'. $_SESSION['initials'].' - '. $_SESSION['po'] .' </title>');
 
 if(isset($_SESSION['filesArray']) && $_SESSION['po']) {
 
@@ -37,16 +40,24 @@ if(isset($_SESSION['filesArray']) && $_SESSION['po']) {
 
     }
     $file = $_SESSION['po'] . '.pdf';
-    //$saveFile = "C:\wamp64\www\savedPOs\\".$_SESSION['po'] . '.pdf';
+    //$saveFile = "C:\wamp64\www\savedPOs\\".$file;
     $saveFile = "C:\Bitnami\wampstack-7.1.21-0\apache2\htdocs\po\savedPOs\\".$_SESSION['po'] . '.pdf';
-    //$pdf->Output('I', $file);
+
     $pdf->Output($saveFile, 'F');
-    $pdf->Output($file, 'I');
+
+
+?>
+    <object class="mergePO" data="<?php echo '..\savedPOs\\'.$file; ?>" type="application/pdf">
+        <embed src="<?php echo '..\savedPOs\\'.$file; ?>" type="application/pdf" />
+    </object>
+<?php
+    //$pdf->Output($file, 'I');
     session_unset();
-    //$pdfFiles = glob('uploadedFiles/*'); //get all file names
+
 
 }
 else{
+
     header('Location: ../index.php');
 }
 ?>

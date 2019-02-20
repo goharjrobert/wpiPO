@@ -7,7 +7,7 @@ img{
     margin-top: 2%;
     margin-left: auto;
     margin-right: auto;
-    height: 10%;
+    height: 15%;
     width: 18%;
 }
 
@@ -22,16 +22,12 @@ img{
     margin-top: 10%;
 }
 
-.reservedPOcard{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -30%;
-}
+.reservedPOcard, .showReservedPOCard{
 
-.showReservedPOCard{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -30%;
+    margin-top: -40%;
+    overflow: auto;
+    overflow-y: auto;
+    height: 50%;
 }
 
 .card{
@@ -97,6 +93,11 @@ iframe{
     height: 50%;
 }
 
+.mergePO{
+    width: 100%;
+    height: 100%;
+}
+
 .uploadFilesSection{
     margin-top: 5%;
 }
@@ -123,4 +124,31 @@ th{
     margin-left: 40%;
     border-bottom-left-radius: 5%;
     border-bottom-right-radius: 5%;
+}
+
+.addItemButton, .btnNext{
+    width: 100%!important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+    border: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #a29ea8;
 }
